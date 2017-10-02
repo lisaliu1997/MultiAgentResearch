@@ -1,0 +1,151 @@
+Library
+
+# a: real, b: real
+# check if two numbers are almost equal to each other
+almostEq(a, b, epsilon = 1e-8)
+
+# vector : ((real, real), (real, real))
+# return the unit vector of the vector
+unit_vector(vector)
+
+# v1, v2: ((real, real), (real, real))
+# find the angle between two vectors
+angle_between(v1, v2)
+
+# S: vertex list = graph/polygon
+# find the interior(average) of vertices
+findInterior(S)
+
+# interior: (real, real), v: (real, real)
+# key of HOF sort function
+# get the angle between (1,0) and the vector from interior to v
+sorthelp(interior,v)
+
+# S: vertex list = graph/polygon
+# sort vertices of a convex polygon
+vsort(S)
+
+# u: coord tuple = x,y coordinate
+# v: coord tuple = x,y coordinate
+# P: point list = point set
+# count points in the left shell of u,v
+countPtsLeft(u, v, P)
+
+# G: (X, Y) 2-d array tuple = coordinate of x and y axis, meshgrid
+# mu: ndarray = info distribution
+# u,v: coord tuple = x,y coordinate
+# find out the area in the left shell of G(u,v|S)
+# basically doing the same thing as count points except taking
+# the sum of the information
+lArea(G, mu, u, v)
+
+# u: coord tuple = x,y coordinate
+# a: num = area/info, < total info
+# S: vertex list = graph/polygon
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+find the point v such that the area in the left shell of u,v is a
+LShell(u, a, S, mu, G)
+
+# x0, x1: points that constitute of the segment that partitions the polygon
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# returns two info distribution that corresponds to the info distribution of
+# the left and right parts
+partitionInfo(x0, x1, mu, G)
+
+# x0, x1, points on the boundary such that the line in between them 
+# partitions the polygon
+# S: vertex list = graph/polygon
+# P: point list = point set
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# T: ndarray = the terrain map
+# returns the tuple ((s1,p1,mu1,T1),(s2,p2,mu2,T2)) in which s1,s2 are 
+# the vertices of the two new polygons, p1,p2 are the point set in the 
+# new polygons, and mu1, mu2 are the normalized info distribution of the 
+# new polygons, it also draws a line to show the partition
+# the actual partition function
+partition(x0, x1, mu, S, G, P, T)
+
+# S: vertex list = graph/polygon
+# P: point list = point set
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# T: ndarray = the terrain map
+# returns the tuple ((s1,p1,mu1,T1),(s2,p2,mu2,T2)) in which s1,s2 are 
+# the vertices of the two new polygons, p1,p2 are the point set 
+# in the new polygons, and mu1, mu2 are the normalized info distribution 
+# of the new polygons, it also draws a line to show the partition
+part2(S, P, mu, G, k, T)
+
+# p1, p2, p3: points that consitutes the turn
+# return > 0 if left turn, < 0 if right turn, = 0 if collinear
+turn(p1, p2, p3)
+
+# P: point list = point set
+# looks for a convex geodesic hull of P
+gh(P)
+
+# u, v: vertices that need to be fit on boundary
+# S: vertex list = graph/polygon
+# given two points, extend them to boundary and return the points on boundary
+boundaryFit(u,v,s)
+
+# p0: the point through which the resulting line has half points on
+# both side
+# S: vertex list = graph/polygon
+# P: point list = point set
+# returns (x0,x1) such that (x0,x1) passes through p0 and there are
+# half points in P on both side (excluding p0 itself)
+geodesic(p0, P, S)
+
+# S: vertex list = graph/polygon
+# P: point list = point set
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# ghp: the geodesic hull of P
+# x0, x1: two points that on both side of the segment there are exactly
+# half number of points
+# T: ndarray = the terrain map
+# partition the polygon into three equitable parts
+part3(x0, x1, ghp, P, G, S, mu, T)
+
+
+# S: vertex list = graph/polygon
+# P: point list = point set
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# T: ndarray = the terrain map
+# the main function for region partition
+# partition the polygon S into n equitable parts, with n as the 
+# number of points in P, so that each subregion contains the same
+# information as specified in mu and exactly one point, returns the 
+# sum of variance of all subregions
+regionPartition(S, P, mu, G, T)
+
+# mini, maxi: int = the range of random numbers we want to generate
+# generate random numbers with in the range of (mini,maxi)
+rand(mini, maxi)
+
+# f: the function that takes in two inputs (x,y)
+# var: the variable we are taking the partial derivative on
+# coord: (x,y) coordinate we are taking the partial derivative on
+# delta: the step size
+partial(f, var, coord)
+
+# P: point list = the (x,y) coordinate list of points
+# epsilon: int = the new points will be with in the range of +-epsilon
+# randomly generate new point list so that each point is with in the range
+# of epsilon with the old point
+newPoints(P, xmin, xmax, ymin, ymax, epsilon = 0.5)
+
+# S: vertex list = graph/polygon
+# mu: ndarray = info distribution
+# G: (X, Y) 1-d array tuple = coordinate of x and y axis, meshgrid
+# T: ndarray = the terrain map
+# n: int = the number of points
+# the function that finds the optimum partition given the terrain map
+# and information map
+simulate(S, mu, G, T, n, dir, iteration = 10)
+
